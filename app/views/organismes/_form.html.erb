@@ -1,0 +1,59 @@
+<div class="" style="margin-top: 5%;"></div>
+<%= form_for(organisme) do |f| %>
+    <% if organisme.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(organisme.errors.count, "error") %> prohibited this organisme from being saved:</h2>
+
+          <ul>
+            <% organisme.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :telephone %>
+      <%= f.text_field :telephone %>
+    </div>
+
+    <div class="field">
+      <%= f.label :adresse %>
+      <%= f.text_field :adresse %>
+    </div>
+
+    <div class="field">
+      <%= f.label :mail %>
+      <%= f.text_field :mail %>
+    </div>
+
+    <div class="field">
+      <%= f.label :fax %>
+      <%= f.text_field :fax %>
+    </div>
+
+    <div class="field">
+      <p class="card-title">Départements</p>
+          <% Departement.all.each do |dep| %>
+              <p>
+                <input id="<%= departement_id(dep.description, dep.id)%>" name="departements[]" type="checkbox" value="<%= dep.id %> " <%= check_if_contains_departement(organisme, dep.id)%> />
+                <label for="<%= departement_id(dep.description, dep.id)%>"> <%= dep.description %> </label>
+              </p>
+          <% end %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>
+<script>
+    $(document).ready(function () {
+        $('select').material_select();
+    });
+    Materialize.updateTextFields();
+</script>

@@ -1,0 +1,58 @@
+.margin10-left {
+  margin-left: 10px;
+}
+
+.absoluteTopRight {
+  position: absolute !important;
+  top: 5px;
+  right: 5px;
+}
+
+.whiteFont {
+  color: white !important;
+}
+
+.no-border {
+  border: none;
+}
+
+.padding {
+  padding: 10px;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+
+#searchform{
+    display:flex;
+}
+
+#searchinput{
+    box-sizing: border-box;
+}
+#submit{
+    box-sizing: border-box;
+}
+
+div.row{
+    margin-left: 20%;
+}
+
+form > div > div > div:nth-child(4){
+margin-bottom:30px;
+}
+#referent_active{
+    position: absolute;
+    left: 60px;
+    top:15px;
+    opacity: 1;
+
+}

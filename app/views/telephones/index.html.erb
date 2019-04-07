@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Téléphones</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Numéro de téléphone</th>
+      <th>Type de numéro</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @telephones.each do |telephone| %>
+      <tr>
+        <td><%= telephone.number %></td>
+        <td><%= telephone.numberType %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

@@ -1,0 +1,72 @@
+<%= form_for(point_service) do |f| %>
+    <% if point_service.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(point_service.errors.count, "error") %> prohibited this point_service from being saved:</h2>
+
+          <ul>
+            <% point_service.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :nom %>
+      <%= f.text_field :nom %>
+    </div>
+
+    <div class="field">
+      <%= f.label :telephone %>
+      <%= f.text_field :telephone %>
+    </div>
+
+    <div class="field">
+      <%= f.label :courriel %>
+      <%= f.text_field :courriel %>
+    </div>
+
+    <div class="field">
+      <%= f.label :fax %>
+      <%= f.text_field :fax %>
+    </div>
+
+    <div class="field">
+      <%= f.fields_for :adresse, set_point_service_adresse(point_service) do |ff| %>
+          <div class="input-field col s12">
+            <%= ff.label :rue %>
+            <%= ff.text_field :rue %>
+          </div>
+          <div class="input-field col s12">
+            <%= ff.label :ville %>
+            <%= ff.text_field :ville %>
+          </div>
+          <div class="input-field col s12">
+            <%= ff.label :pays %>
+            <%= ff.text_field :pays %>
+          </div>
+          <div class="input-field col s12">
+            <%= ff.label "Code Postal" %>
+            <%= ff.text_field :codePostal %>
+          </div>
+      <% end %>
+    </div>
+    <div class="field">
+      <p class="card-title">Départements</p>
+      <% Departement.all.each do |dep| %>
+          <p>
+            <input id="<%= departement_id(dep.description, dep.id)%>" name="departements[]" type="checkbox" value="<%= dep.id %> " <%= check_if_ptservice_contains_departement(point_service, dep.id)%> />
+            <label for="<%= departement_id(dep.description, dep.id)%>"> <%= dep.description %> </label>
+          </p>
+      <% end %>
+    </div>
+    <div class="actions">
+      <%= f.button :Enregistrer, name: "organisme_id", value: @organisme.id %>
+    </div>
+<% end %>
+<script>
+    $(document).ready(function () {
+        $('select').material_select();
+    });
+    Materialize.updateTextFields();
+</script>

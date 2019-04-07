@@ -1,0 +1,13 @@
+<nav>
+  <div class="nav-wrapper">
+    <a class="brand-logo left margin10-left">Nouvel Employé</a>
+  </div>
+</nav>
+
+<div class="container">
+<%= render 'form', :locals => {:controller => 'employes', :action => 'create'}, employe: @employe %>
+
+<% if @organisme != nil %>
+  <%= link_to 'Back', organisme_path(@organisme) %>
+<% end %>
+</div>

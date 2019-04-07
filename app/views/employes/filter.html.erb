@@ -1,0 +1,61 @@
+<div class="padding container">
+  <p id="notice"><%= notice %></p>
+
+  <h5><i class="material-icons">home</i>   <a href="/organismes">Organisme</a></h5>
+  <div class="row">
+    <% if @employe != nil %>
+      <%= link_to 'Consulter/modifier mon profil d\'employé', @employe %>
+    <% end %>
+    <div class="col s12">
+        <b> Liste des organismes dont vous faites partie ou dirigez </b>
+
+        <% if @organismes.size == 0 %>
+          <p> Vous n'êtes enregistrés dans aucun organisme, veuillez aller dans le bottin d'organisme et créer un organisme ou bien joignez en un déjà existant. </p>
+        <% end %>
+
+      <ul class="collection">
+        <% @organismes.each do |organisme| %>
+            <li class="row collection-item avatar">
+              <div class="col s4">
+
+                <span class="title"><%= organisme.name %></span>
+                <p>
+                  <i class="material-icons tiny">phone</i> <%= organisme.telephone %>
+                  <br/>
+                  <i class="material-icons tiny">location_on</i> <%= organisme.adresse %>
+                  <br/>
+                  <i class="material-icons tiny">email</i> <%= organisme.mail %>
+                  <br/>
+                  <i class="material-icons tiny">print</i> <%= organisme.fax %>
+                  <br/>
+                  <i class="">Nombre d'employés : </i> <%= organisme.employes.count %>
+                  <br/>
+                  <i class="">Nombre de points de services : </i> <%= organisme.point_service.count %>
+                </p>
+              </div>
+
+              <div class="secondary-content">
+                <%= link_to 'Consulter', organisme %>
+                <%= link_to 'Modifier', edit_organisme_path(organisme) %>
+                <%= link_to 'Effacer', organisme, method: :delete, data: { confirm: 'Êtes-vous sûr?' } %>
+              </div>
+
+            </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <br>
+
+  <a <%= link_to 'Voir tous les employés', employes_path, class: 'button alt right' %></a>
+
+</div>
+
+<!-- Dropdown Structure -->
+<script >
+
+    $( document ).ready(function() {
+        $(".dropdown-button").dropdown({ hover: true });
+    });
+
+</script>

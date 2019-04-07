@@ -1,0 +1,7 @@
+
+<div class="padding container" >
+
+    <h3><i class="material-icons">mode_edit</i>  Modifier Employé</h3>
+<%= render 'form', :locals => {:controller => 'employes', :action => 'update'}, employe: @employe %>
+    <%= link_to 'Retour', employes_path %>
+</div>

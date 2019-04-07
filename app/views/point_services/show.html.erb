@@ -1,0 +1,89 @@
+<p id="notice"><%= notice %></p>
+
+
+<div class="padding container">
+  <div class="row">
+    <div class="col s6 m6">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4"><%= @point_service.nom %></span>
+          <ul class="collection no-border">
+            <li class="row collection-item">
+              <p>
+                <i class="material-icons tiny">phone</i> <%= @point_service.telephone %>
+                <br/>
+                <i class="material-icons tiny">email</i> <%= @point_service.courriel %>
+                <br/>
+                <i class="material-icons tiny">desktop_mac</i> <%= @point_service.fax %>
+                <br/>
+                <% if !@point_service.adresse.nil?%>
+                  <i class="material-icons tiny">location_on</i> <%= @point_service.adresse.rue %>
+                   <%= @point_service.adresse.ville %> <%= @point_service.adresse.codePostal %>
+                   <%= @point_service.adresse.pays %>
+                  <br/>
+                <% end %>
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col s6 m6">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">Départements(<%= @point_service.departements.count %>)</span>
+          <ul class="collection no-border">
+            <% @point_service.departements.each do |dep| %>
+                <li class="row collection-item">
+                  <div class="col s6">
+                    <i class="material-icons tiny">business</i>
+                    <span class="title"><%= dep.description %></span>
+                  </div>
+                </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 m12">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">Locaux (<%= @point_service.local.count %>)</span>
+          <ul class="collection no-border">
+            <% @point_service.local.each do |local| %>
+                <li class="row collection-item avatar">
+                  <div class="col s4">
+                    Nom du local
+                    <%= image_tag 'visage.png', :class => "circle" %>
+                    </br>
+                    <span class="title"><%= local.nom %></span>
+                  </div>
+                  <div class="col s4">
+                    Nombre de places
+                    </br>
+                    <span class="title"><%= local.nombrePlaces %></span>
+                  </div>
+                  <div class="secondary-content">
+                    <%= link_to 'Consulter', organisme_point_service_local_path(@organisme, @point_service, local) %>
+                    <%= link_to 'Modifier', edit_organisme_point_service_local_path(@organisme, @point_service, local) %>
+                    <%= link_to 'Supprimer', organisme_point_service_locals_path(@organisme, @point_service, local), method: :delete, data: {confirm: 'Êtes-vous sûr de vouloir supprimer?'} %>
+                  </div>
+
+                </li>
+            <% end %>
+          </ul>
+          <%= link_to new_organisme_point_service_local_path(@point_service.organisme.id, @point_service), {:class => "btn-floating btn-large waves-effect waves-light red margin10-left"} do %>
+              <i class="material-icons">add</i>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= link_to 'Modifier', edit_organisme_point_service_path(@organisme, @point_service) %> |
+  <%= link_to 'Retour', organisme_path(@organisme) %>
+</div>
+
+
+

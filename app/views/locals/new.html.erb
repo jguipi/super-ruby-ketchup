@@ -1,0 +1,42 @@
+<div class="padding container">
+  <h1>Nouveau Local</h1>
+  <%= form_for(@local) do |f| %>
+      <% if @local.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@local.errors.count, "error") %> prohibited this local from being saved:</h2>
+
+            <ul>
+              <% @local.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+
+      <div class="field">
+        <%= f.label :nom %>
+        <%= f.text_field :nom %>
+      </div>
+
+      <div class="field">
+        <%= f.label "Nombre de places" %>
+        <%= f.text_field :nombrePlaces %>
+      </div>
+      <div class="field">
+        <p class="card-title">Services</p>
+        <% Service.all.each do |service| %>
+            <p>
+              <input id="<%= service_id(service.nom, service.id) %>" name="services[]" type="checkbox" value="<%= service.id %> "/>
+              <label for="<%= service_id(service.nom, service.id) %>"> <%= service.nom %> </label>
+            </p>
+        <% end %>
+      </div>
+
+      <div class="actions">
+        <%= f.button :Enregistrer, name: "point_service_id", value: @point_service.id %>
+      </div>
+  <% end %>
+
+
+  <%= link_to 'Retour', organisme_point_service_path(@organisme, @point_service) %>
+</div>

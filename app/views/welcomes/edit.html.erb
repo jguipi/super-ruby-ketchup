@@ -1,0 +1,33 @@
+<script >
+
+    $( document ).ready(function() {
+        $(".dropdown-button").dropdown({ inDuration: 800,hover: true });
+    });
+
+</script>
+
+<!-- Dropdown Structure -->
+<ul id="dropdown1" class="dropdown-content">
+
+  <li><a <%= link_to 'Referents', referents_path, class: 'button alt' %></a></li>
+  <<li><a <%= link_to 'Organismes', organismes_path, class: 'button alt' %></a></li>
+  <li><a href="#!">three</a></li>
+</ul>
+<nav>
+  <div class="nav-wrapper" style="margin-right: 2px">
+    <a <%= link_to 'Super ruby Ketchup', welcomes_path, class: 'button alt brand-logo' %></a>
+    <ul class="right hide-on-med-and-down">
+      <li class="button"><a href=""><i class="material-icons left marg">search</i></a></li>
+      <li  class="button" style="margin-top: 20px"><a href="">Sass</a></li>
+      <li style="margin-top: 20px"><a href="">Components </a></li>
+      <!-- Dropdown Trigger -->
+      <li><a class="dropdown-button" style="margin-top: 20px" href="#!" data-activates="dropdown1">Bottins</a></li>
+    </ul>
+  </div>
+</nav>
+<h1>Editing Welcome</h1>
+
+<%= render 'form', welcome: @welcome %>
+
+<%= link_to 'Show', @welcome %> |
+<%= link_to 'Back', welcomes_path %>

@@ -1,0 +1,75 @@
+<div class="padding container">
+
+  <p id="notice"><%= notice %></p>
+
+  <div class="row">
+    <div class="">
+      <div class="card horizontal">
+        <div class="card-image">
+          <%= image_tag 'visage.png' %>
+        </div>
+        <div class="card-stacked">
+          <div class="card-content">
+            <div class="col s6">
+              <p>
+                <strong>Nom:</strong>
+                <%= @employe.prenom %>
+              </p>
+
+              <p>
+                <strong>Prenom:</strong>
+                <%= @employe.nom %>
+              </p>
+
+              <p>
+                <strong>Courriel:</strong>
+                <%= @employe.courriel %>
+              </p>
+
+              <p>
+                <strong>Date d'embauche:</strong>
+                <%= @employe.dateEmbauche %>
+              </p>
+              <p>
+                <strong>Role:</strong>
+                <%= @employe.role %>
+              </p>
+              <p>
+                <strong>Organisme:</strong>
+                <%= @employe.organisme.name %>
+              </p>
+          </div>
+
+          <div class="col s6">
+            <b>Formations/Diplomes</b>
+
+            <% @employe.educations.each do |education| %>
+                <p>
+                  <strong>Nom de Diplome/Formation:</strong>
+                 <%= education.name %>
+                </p>
+
+                <p>
+                  <strong>Type:</strong>
+                  <%= education.type_education %>
+                </p>
+
+                <p>
+                  <strong>Date complété:</strong>
+                  <%= education.date_completed %>
+                </p>
+            <% end %>
+          </div>
+          </div>
+          <div class="card-action">
+            <% if current_user.superadmin_role? || (current_user.supervisor_role? && @employe.role != "Directeur") || current_user.email == @employe.courriel %>
+              <%= link_to 'Modifier', edit_employe_path(@employe), :class => "waves-effect waves-light btn whiteFont" %> |
+              <%= link_to 'Effacer', @employe, method: :delete, data: { confirm: 'Are you sure?' }, :class => "waves-effect waves-light btn whiteFont"%>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= link_to 'Back', employes_path %>
+</div>

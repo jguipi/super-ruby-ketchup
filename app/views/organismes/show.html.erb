@@ -1,0 +1,109 @@
+<% unless @notice.nil? %>
+    <p id="notice"><%= notice %></p>
+<% end %>
+
+<div class="padding container">
+
+
+  <div class="row">
+    <div class="col s8 m8">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4"><%= @organisme.name %></span>
+          <ul class="collection no-border">
+            <li class="row collection-item">
+              <div class="col s12">
+                <p>
+                  <i class="material-icons tiny">phone</i> <%= @organisme.telephone %>
+                  <br/>
+                  <i class="material-icons tiny">location_on</i> <%= @organisme.adresse %>
+                  <br/>
+                  <i class="material-icons tiny">email</i> <%= @organisme.mail %>
+                  <br/>
+                  <i class="material-icons tiny">print</i> <%= @organisme.fax %>
+                  <br/>
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col s4 m4">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">Départements(<%= @organisme.departements.count %>)</span>
+          <ul class="collection no-border">
+            <% @organisme.departements.each do |dep| %>
+                <li class="row collection-item">
+                  <div class="col s12">
+                    <i class="material-icons tiny">business</i>
+                    <span class="title"><%= dep.description %></span>
+                  </div>
+                </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col s6 m6">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">Employés (<%= @organisme.employes.count %>)</span>
+          <ul class="collection no-border">
+            <% @organisme.employes.each do |employe| %>
+                <li class="row collection-item avatar">
+                  <div class="col s1">
+                    <%= image_tag 'visage.png', :class => "circle" %>
+                    <span class="title"><%= employe.prenom %> <%= employe.nom %></span>
+                  </div>
+                  <div class="secondary-content">
+                    <%= link_to 'Consulter', employe %>
+                    <% if current_user != nil %>
+                    <% if current_user.superadmin_role? || (current_user.supervisor_role? && employe.role != "Directeur")|| current_user.email == employe.courriel %>
+                    <%= link_to 'Modifier', edit_employe_path(employe) %>
+                    <%= link_to 'Effacer', employe, method: :delete, data: {confirm: 'Êtes-vous sûr?'} %>
+                    <% end %>
+                    <% end %>
+
+                  </div>
+                </li>
+            <% end %>
+          </ul>
+          <%= link_to new_organisme_employe_path(@organisme), {:class => "btn-floating btn-large waves-effect waves-light red margin10-left"} do %>
+              <i class="material-icons">add</i>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col s6 m6">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">Point de services(<%= @organisme.point_service.count %>)</span>
+          <ul class="collection no-border">
+            <% @organisme.point_service.each do |ptService| %>
+                <li class="row collection-item">
+                  <div class="col s11">
+                    <span class="title"><%= ptService.nom %></span>
+                  </div>
+                  <div class="secondary-content">
+                    <%= link_to 'Consulter', organisme_point_service_path(@organisme, ptService) %>
+                    <%= link_to 'Modifier', edit_organisme_point_service_path(@organisme, ptService) %>
+                    <%= link_to 'Effacer', ptService, method: :delete, data: {confirm: 'Êtes-vous sûr'} %>
+                  </div>
+                </li>
+            <% end %>
+          </ul>
+          <%= link_to new_organisme_point_service_path(@organisme), {:class => "btn-floating btn-large waves-effect waves-light red margin10-left"} do %>
+              <i class="material-icons">add</i>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= link_to 'Modifier', edit_organisme_path(@organisme) %> |
+  <%= link_to 'Retour', organismes_path %>
+</div>

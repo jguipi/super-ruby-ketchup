@@ -1,0 +1,101 @@
+
+  <div class="row">
+    <div class="col s12">
+<%= form_for(employe, :url => url_for(:controller => locals[:controller], :action => locals[:action]), html: {class: ""} ) do |f| %>
+<% if employe.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(employe.errors.count, "error") %> prohibited this employe from being saved:</h2>
+
+    <ul>
+    <% employe.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+      <div class="row" style="margin-top: 2%;">
+        <div class="input-field col s6">
+          <%= f.label :nom %>
+          <%= f.text_field :nom , :class => "validate" %>
+        </div>
+        <div class="input-field col s6">
+          <%= f.text_field :prenom , :class => "validate" %>
+          <%= f.label :prenom %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <%= f.label :courriel %>
+          <%= f.text_field :courriel %>
+        </div>
+        <div class="input-field col s12">
+          <%= f.label :telephone_home %>
+          <%= f.text_field :telephone_home %>
+        </div>
+        <div class="input-field col s12">
+          <%= f.label :telephone_travail %>
+          <%= f.text_field :telephone_travail %>
+        </div>
+        <div class="input-field col s12">
+          <%= f.label :telephone_cellulaire %>
+          <%= f.text_field :telephone_cellulaire %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          Role
+            <%= f.select :role, current_user.superadmin_role? ? ['Directeur', 'Coordonnateur', 'Assistant coordonnateur', 'Intervenant', 'Intervenant en formation'] : ['Coordonnateur', 'Assistant coordonnateur', 'Intervenant', 'Intervenant en formation'] %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          Date d'embauche
+          <%= f.date_select :dateEmbauche %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          Organisme
+          <%= f.select :organisme_id, @options %>
+        </div>
+      </div>
+
+      <b style="display: block;"> Informations Académiques: </b>
+      <div>
+        <%= f.fields_for :educations do |education| %>
+          <div class="input-field col s3">
+              Nom du diplome/formation
+              <%= education.text_field :name %>
+          </div>
+          <div class="input-field col s4">
+              Type d'éducation
+              <%= education.text_field :type_education %>
+          </div>
+          <div class="input-field col s4">
+            Date complété
+            <%= education.date_select :date_completed %>
+          </div>
+          <div class="input-field col s1">
+            <%= education.check_box :_destroy %>
+             <%= education.label :_destroy, 'delete' %>
+          </div>
+        <% end %>
+
+        <%= f.submit 'Add education', :name => "add_education" %>
+        <%= f.submit 'Delete checked educations', :name => "remove_education" %>
+      </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+</div>
+</div>
+<script>
+$(document).ready(function() {
+    // Select - Single
+    $('select:not([multiple])').material_select();
+    Materialize.updateTextFields();
+});
+</script>

@@ -1,0 +1,7 @@
+<div class="padding container">
+  <h1>Modifier le local</h1>
+
+  <%= render 'form', local: @local %>
+
+  <%= link_to 'Retour', organisme_point_service_path(@point_service.organisme_id, @point_service.id) %>
+</div>

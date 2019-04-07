@@ -1,0 +1,61 @@
+
+
+  <script >
+
+      $( document ).ready(function() {
+          $(".dropdown-button").dropdown({ hover: true });
+          $('.slider').slider();
+
+      });
+
+  </script>
+
+
+<body class="html-jc">
+
+<!-- Trigger/Open The Modal -->
+<button id="myBtn">Open Modal</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Some text in the Modal..</p>
+  </div>
+
+</div>
+
+</body>
+
+
+
+
+
+<div class="slider fullscreen" style="">
+  <ul class="slides">
+    <li>
+      <%= image_tag "1.jpg" %> <!-- random image -->
+      <div class="caption center-align">
+        <h3>Bottins pour le RQRSDA!</h3>
+        <h5 class="light grey-text text-lighten-3">Accueil des bottins.</h5>
+      </div>
+    </li>
+    <li>
+      <%= image_tag "2.jpg" %> <!-- random image -->
+      <div class="caption left-align">
+        <h3>RQRSDA</h3>
+        <h5 class="light grey-text text-lighten-3">Maintenant sans sucre</h5>
+      </div>
+    </li>
+    <li>
+      <%= image_tag "3.jpg" %> <!-- random image -->
+      <div class="caption right-align">
+        <h3>RQRSDA!</h3>
+        <h5 class="light grey-text text-lighten-3">Tout pour les bottins</h5>
+      </div>
+    </li>
+
+  </ul>
+</div>

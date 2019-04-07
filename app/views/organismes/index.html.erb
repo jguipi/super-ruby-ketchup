@@ -1,0 +1,53 @@
+<div class="padding container">
+  <p id="notice"><%= notice %></p>
+
+  <h3><i class="material-icons">home</i>   <a href="/organismes">Organismes</a></h3>
+  <div class="row">
+    <div class="col s12">
+      <ul class="collection">
+        <% @organismes.each do |organisme| %>
+            <li class="row collection-item avatar">
+              <div class="col s4">
+
+                <span class="title"><%= organisme.name %></span>
+                <p>
+                  <i class="material-icons tiny">phone</i> <%= organisme.telephone %>
+                  <br/>
+                  <i class="material-icons tiny">location_on</i> <%= organisme.adresse %>
+                  <br/>
+                  <i class="material-icons tiny">email</i> <%= organisme.mail %>
+                  <br/>
+                  <i class="material-icons tiny">print</i> <%= organisme.fax %>
+                  <br/>
+                  <i class="">Nombre d'employés : </i> <%= organisme.employes.count %>
+                  <br/>
+                  <i class="">Nombre de points de services : </i> <%= organisme.point_service.count %>
+                </p>
+              </div>
+
+              <div class="secondary-content">
+                <%= link_to 'Consulter', organisme %>
+                <%= link_to 'Modifier', edit_organisme_path(organisme) %>
+                <%= link_to 'Effacer', organisme, method: :delete, data: { confirm: 'Êtes-vous sûr?' } %>
+              </div>
+
+            </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <br>
+
+  <%= link_to new_organisme_path,  { :class=>"btn-floating btn-large waves-effect waves-light red margin10-left" } do %>
+      <i class="material-icons">add</i>
+  <% end %>
+</div>
+
+<!-- Dropdown Structure -->
+<script >
+
+    $( document ).ready(function() {
+        $(".dropdown-button").dropdown({ hover: true });
+    });
+
+</script>

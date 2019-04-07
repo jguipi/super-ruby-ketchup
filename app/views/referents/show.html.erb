@@ -1,0 +1,125 @@
+
+
+<div class=" container">
+  <h3><i class="material-icons">home</i>
+    <a href="/referents">Référent</a>
+  </h3>
+  <p id="notice"><%= notice %></p>
+
+  <div class="row">
+    <div class="">
+      <div class="card horizontal">
+        <div class="card-image">
+          <%= image_tag 'visage.png' %>
+        </div>
+        <div class="card-stacked">
+          <div class="card-content">
+
+            <p>
+              <strong>Nom:</strong>
+              <%= @referent.prenom %>
+
+            </p>
+
+            <p>
+              <strong>Prenom:</strong>
+              <%= @referent.nom %>
+            </p>
+
+            <p>
+              <strong>ID:</strong>
+              <%= @referent.refid %>
+            </p>
+
+            <p>
+              <strong>État:</strong>
+              <% if(@referent.active) %>
+              <%=  "Actif"%>
+              <% else %>
+              <%=  "Inactif" %>
+              <% end %>
+
+            </p>
+
+            <p>
+              <strong>Fax:</strong>
+              <%= @referent.fax %>
+            </p>
+
+            <p>
+              <strong>Courriel:</strong>
+              <%= @referent.courriel %>
+            </p>
+
+            <p>
+              <strong>Titre:</strong>
+              <%= @referent.title %>
+            </p>
+
+            <p>
+              <strong>Departement:</strong>
+              <%= @referent.departement %>
+            </p>
+
+            <p>
+              <strong>Preference de contact:</strong>
+              <%= @referent.preferenceContact %>
+            </p>
+
+
+            <p>
+              <strong>Organisme:</strong>
+              <% if @referent.organisme.blank? %>
+                  Pas d'organisme associé
+              <% else %>
+                  <%= @referent.organisme.name %>
+              <% end %>
+            </p>
+          </div>
+          <div class="card-action">
+            <%= link_to 'Modifier', edit_referent_path(@referent), :class => "waves-effect waves-light btn whiteFont" %> |
+              <%= link_to 'Effacer', @referent, method: :delete, data: { confirm: 'Are you sure?' }, :class => "waves-effect waves-light btn whiteFont"%>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+      <div class="">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">Numéros de téléphones</span>
+            <% @referent.telephones.each do |telephone| %>
+                <p>
+                  <strong>Numero Telephone:</strong>
+                 <%= telephone.number %>
+                </p>
+
+                <p>
+                  <strong>Type de Numero:</strong>
+                  <%= telephone.numberType %>
+                </p>
+            <% end %>
+          </div>
+          <div class="card-action">
+
+            <%= form_for([@referent, @referent.telephones.build]) do |f| %>
+            <div class="row">
+              <span style="display: block;">Ajouter un numéro de téléphone</span>
+              <div class="input-field  s6">
+                <%= f.label :number, :class => "validate" %>
+                <%= f.text_field :number, :class => "validate" %>
+              </div>
+              <div class="input-field  s6">
+                <%= f.label :numberType, :class => "validate" %>
+                <%= f.text_area :numberType, :class => "validate materialize-textarea" %>
+              </div>
+              <%= f.submit "Ajouter", :class => "waves-effect waves-light btn margin10-left right" %>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+  </div>
+    <%= link_to 'Back', referents_path %>
+</div>

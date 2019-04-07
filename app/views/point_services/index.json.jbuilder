@@ -1,0 +1,1 @@
+json.array! @point_services, partial: 'point_services/point_service', as: :point_service
