@@ -1,24 +1,6 @@
-# README
+# Super Ruby Ketchup 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The project is host at https://jclog210.herokuapp.com/
 
-Things you may want to cover:
+Ask for credentials
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
