@@ -1,6 +1,6 @@
 # Super Ruby Ketchup 
 
-The project is host at https://jclog210.herokuapp.com/
+Buisness managment app in ruby on rail.
 
-Ask for credentials
+Ask for credentials and the production URL 
 
